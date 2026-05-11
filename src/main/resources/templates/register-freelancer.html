@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Freelancer Registration</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+<div class="container mt-5">
+
+<h2 class="text-center text-success">Register as Freelancer</h2>
+
+<p style="color:red;" th:text="${error}"></p>
+
+<div class="card p-4 shadow mt-4">
+
+<form action="/register-freelancer" method="post">
+
+<div class="mb-3">
+<input type="email" name="email" class="form-control" placeholder="Enter Email" required>
+</div>
+
+<div class="mb-3">
+<input type="password" name="password" class="form-control" placeholder="Enter Password" required>
+</div>
+
+<button type="submit" class="btn btn-success w-100">Register</button>
+
+</form>
+
+<p class="text-center mt-3">
+Already have an account? <a href="/login">Login here</a>
+</p>
+
+</div>
+</div>
+
+</body>
+</html>

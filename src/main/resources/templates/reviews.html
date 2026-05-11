@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Reviews</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background: #f2f7ff; }
+        .star-display { color: orange; font-size: 20px; }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5" style="max-width: 700px;">
+
+    <h2 class="text-center mb-1">Reviews for <span th:text="${provider.name}"></span></h2>
+    <p class="text-center text-muted mb-4" th:text="${provider.serviceType}"></p>
+
+    <!-- Existing reviews -->
+    <div th:if="${#lists.isEmpty(reviews)}" class="alert alert-info">No reviews yet. Be the first!</div>
+
+    <div th:each="r : ${reviews}" class="card mb-3 shadow-sm">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-start">
+                <div>
+                    <strong th:text="${r.clientName}"></strong>
+                    <span class="star-display ms-2" th:text="${'★'.repeat(r.rating) + '☆'.repeat(5 - r.rating)}"></span>
+                </div>
+                <!-- Edit/Delete only shown to the review author -->
+                <div th:if="${loggedUser != null and loggedUser.email == r.clientEmail}">
+                    <a th:href="@{'/reviews/' + ${r.id} + '/edit'}" class="btn btn-sm btn-outline-secondary me-1">Edit</a>
+                    <a th:href="@{'/reviews/' + ${r.id} + '/delete'}"
+                       onclick="return confirm('Delete this review?')"
+                       class="btn btn-sm btn-outline-danger">Delete</a>
+                </div>
+            </div>
+            <p class="mt-2 mb-0" th:text="${r.comment}"></p>
+        </div>
+    </div>
+
+    <!-- Add review form — only for logged-in clients -->
+    <div th:if="${loggedUser != null and loggedUser.role == 'CLIENT'}" class="card shadow mt-4">
+        <div class="card-body">
+            <h5>Write a Review</h5>
+            <form th:action="@{'/reviews/' + ${provider.id}}" method="post">
+                <div class="mb-3">
+                    <label class="form-label">Rating</label>
+                    <select name="rating" class="form-select" required>
+                        <option value="5">★★★★★ (5)</option>
+                        <option value="4">★★★★☆ (4)</option>
+                        <option value="3">★★★☆☆ (3)</option>
+                        <option value="2">★★☆☆☆ (2)</option>
+                        <option value="1">★☆☆☆☆ (1)</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Comment</label>
+                    <textarea name="comment" class="form-control" rows="3" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Submit Review</button>
+            </form>
+        </div>
+    </div>
+
+    <div th:if="${loggedUser == null}" class="alert alert-warning mt-4">
+        <a href="/login">Log in</a> to write a review.
+    </div>
+
+    <a href="/view-services" class="btn btn-secondary mt-4">← Back to Freelancers</a>
+</div>
+
+</body>
+</html>

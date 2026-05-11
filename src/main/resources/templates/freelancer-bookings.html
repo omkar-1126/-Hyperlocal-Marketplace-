@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>My Bookings</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+<div class="container mt-5">
+
+<h2 class="text-center mb-4">My Bookings</h2>
+
+<table class="table table-bordered shadow">
+
+<thead class="table-dark">
+<tr>
+<th>ID</th>
+<th>Client</th>
+<th>Service</th>
+<th>Date</th>
+<th>Time</th>
+<th>Status</th>
+<th>Client Address</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody>
+<tr th:each="booking : ${bookings}">
+<td th:text="${booking.id}"></td>
+<td th:text="${booking.clientEmail}"></td>
+<td th:text="${booking.provider.serviceType}"></td>
+<td th:text="${booking.date}"></td>
+<td th:text="${booking.startTime} + ' - ' + ${booking.endTime}"></td>
+<td th:text="${booking.status}"></td>
+<td>
+  <span th:if="${booking.status == 'ACCEPTED'}" th:text="${booking.homeAddress}" class="text-success fw-semibold"></span>
+  <span th:unless="${booking.status == 'ACCEPTED'}" class="text-muted fst-italic">Visible after acceptance</span>
+</td>
+<td>
+<a th:href="@{'/freelancer/accept/' + ${booking.id}}"
+   class="btn btn-success btn-sm">Accept</a>
+<a th:href="@{'/freelancer/reject/' + ${booking.id}}"
+   class="btn btn-danger btn-sm">Reject</a>
+</td>
+</tr>
+</tbody>
+
+</table>
+
+<a href="/freelancer/dashboard" class="btn btn-primary">Back to Dashboard</a>
+
+</div>
+
+</body>
+</html>

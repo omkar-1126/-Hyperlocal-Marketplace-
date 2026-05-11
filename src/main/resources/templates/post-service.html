@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register as Freelancer</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #e8f5e9, #f1f8e9);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card {
+            background: white;
+            width: 420px;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        h2 {
+            text-align: center;
+            color: #2e7d32;
+            margin-bottom: 20px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #2e7d32;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1b5e20;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="card">
+    <h2>Register as Freelancer</h2>
+
+    <form method="post" action="/save-service">
+        <input name="name" placeholder="Your Name" required>
+
+        <select name="serviceType" required>
+            <option value="">Select Service</option>
+            <option>Tutor</option>
+            <option>Electrician</option>
+            <option>Plumber</option>
+        </select>
+
+        <input name="location" placeholder="Location" required>
+        <input name="experience" placeholder="Experience (e.g. 3 years)" required>
+        <input name="phone" placeholder="Phone Number" required>
+
+        <button type="submit">Register</button>
+    </form>
+</div>
+
+</body>
+</html>

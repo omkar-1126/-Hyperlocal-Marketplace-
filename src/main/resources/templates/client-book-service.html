@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Book Service</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+<div class="container mt-5">
+
+<h2 class="text-center">Book a Service</h2>
+
+<div class="card p-4 shadow mt-4">
+
+<form action="/client/book" method="post">
+
+<div class="mb-3">
+<label>Client Name</label>
+<input type="text" name="clientName" class="form-control" required>
+</div>
+
+<div class="mb-3">
+<label>Service</label>
+<input type="text" name="serviceName" class="form-control" required>
+</div>
+
+<!-- Freelancer Email - shown so client knows who they're booking -->
+<div class="mb-3">
+<label>Freelancer Email</label>
+<input type="email" name="freelancerEmail" class="form-control" 
+       placeholder="Enter freelancer email" required>
+</div>
+
+<div class="mb-3">
+<label>Date</label>
+<input type="date" name="date" class="form-control" required>
+</div>
+
+<div class="mb-3">
+<label>Time Slot</label>
+<input type="text" name="timeSlot" class="form-control" required>
+</div>
+
+<button type="submit" class="btn btn-primary">Book Service</button>
+
+</form>
+
+</div>
+</div>
+
+</body>
+</html>
